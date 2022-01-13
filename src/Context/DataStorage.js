@@ -5,12 +5,10 @@ const DataStorage = createContext();
 function AppState (props) {
 
   return (
-    <div>
-        <DataStorage.Provider value={{  }}>
+    <DataStorage.Provider value={{  }}>
             {props.children}
-        </DataStorage.Provider>
-    </div>
-    )
+    </DataStorage.Provider>
+  )
 }
 function useAppData() {
   return useContext(DataStorage)
