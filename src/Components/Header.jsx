@@ -10,8 +10,8 @@ function Header() {
         <div>
             <div className="flex justify-between m-[29px]">
                 <div className="flex border-2 rounded-lg text-sm">
-                    <input type="text" className="px-4 py-2 w-80 focus:outline-none" placeholder="Search..." />
-                    <button className="flex items-center justify-center px-4">
+                    <input type="text" className="px-4 py-2 w-80 focus:outline-none" placeholder="Search..." name="searchBar" />
+                    <button className="flex items-center justify-center px-4" htmlFor="searchBar">
                         <BsSearch className="text-[18px]" />
                     </button>
                 </div>
