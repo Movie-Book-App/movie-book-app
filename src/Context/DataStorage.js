@@ -1,13 +1,16 @@
 import { createContext, useContext } from "react"
-import MovieSearch from './MovieSearch'
+import MovieSearch from "./MovieSearch"
 
 const DataStorage = createContext()
 
 function AppState(props) {
-    const test = MovieSearch();
-    const [globalSearchString, setGlobalSearchString] = test;
+    const [globalSearchString, setGlobalSearchString] = MovieSearch()
     return (
-        <DataStorage.Provider value={{ globalSearchString, setGlobalSearchString }}>{props.children}</DataStorage.Provider>
+        <DataStorage.Provider
+            value={{ globalSearchString, setGlobalSearchString }}
+        >
+            {props.children}
+        </DataStorage.Provider>
     )
 }
 function useAppData() {

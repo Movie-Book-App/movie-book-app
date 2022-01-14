@@ -9,6 +9,7 @@ import { FiLogOut } from "react-icons/fi"
 import { useState } from "react"
 import { GoCalendar } from "react-icons/go"
 import SidebarBtn from "./Sidebar-btn"
+import FetchMovie from "./FetchMovie"
 function SideBar() {
     const [isOpen, setIsOpen] = useState(false)
 
@@ -50,6 +51,7 @@ function SideBar() {
                 <SidebarBtn icon={<BsBookmarkStar />} title="Favorites" />
                 <SidebarBtn icon={<GoCalendar />} title="Comming Soon" />
                 <SidebarBtn icon={<FaUserFriends />} title="Friends" />
+                <FetchMovie />
             </div>
             <div className="btn-bottom">
                 <SidebarBtn icon={<FiSettings />} title="Settings" />
