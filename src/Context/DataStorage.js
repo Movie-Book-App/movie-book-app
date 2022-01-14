@@ -1,17 +1,17 @@
-import { createContext, useContext } from 'react';
+import { createContext, useContext } from "react"
+import MovieSearch from './MovieSearch'
 
-const DataStorage = createContext();
+const DataStorage = createContext()
 
-function AppState (props) {
-
-  return (
-    <DataStorage.Provider value={{  }}>
-            {props.children}
-    </DataStorage.Provider>
-  )
+function AppState(props) {
+    const test = MovieSearch();
+    const [globalSearchString, setGlobalSearchString] = test;
+    return (
+        <DataStorage.Provider value={{ globalSearchString, setGlobalSearchString }}>{props.children}</DataStorage.Provider>
+    )
 }
 function useAppData() {
-  return useContext(DataStorage)
+    return useContext(DataStorage)
 }
 
-export { DataStorage, useAppData, AppState };
+export { DataStorage, useAppData, AppState }
