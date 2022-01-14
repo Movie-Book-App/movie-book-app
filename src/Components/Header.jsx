@@ -6,7 +6,7 @@ function Header() {
     const userPicUrl = "https://avatars.githubusercontent.com/u/85481701?v=4"
 
     return (
-        <div className="flex justify-between m-[29px] w-full">
+        <div className="flex justify-between mt-[29px] mb-[29px] w-full">
             <div className="flex border-2 rounded-lg text-sm">
                 <input
                     type="text"
@@ -34,7 +34,7 @@ function Header() {
                             src={userPicUrl}
                         />
                     </div>
-                    <div className="mr-[29px] text-[18px] cursor-pointer">
+                    <div className="text-[18px] cursor-pointer">
                         {userName}
                     </div>
                 </div>

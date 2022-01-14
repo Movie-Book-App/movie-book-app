@@ -5,13 +5,13 @@ import Main from "./Components/Main"
 
 function App() {
     return (
-        <div className="rounded-[35px] w-[1292px] mt-[64px] mb-[41px] mx-[74px] border flex">
+        <div className="rounded-[35px] min-w-[1292px] mt-[64px] mb-[41px] mx-[74px] border flex">
             <div>
                 <SideBar />
             </div>
-            <div className="flex flex-col">
+            <div className="flex flex-col mr-[27px]">
                 <Header />
-                <Main />
+                <Main className="" />
             </div>
         </div>
     )
