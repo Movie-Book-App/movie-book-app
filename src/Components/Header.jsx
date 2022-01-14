@@ -21,7 +21,7 @@ function Header() {
     }
 
     return (
-        <div className="flex justify-between m-[29px] w-full">
+        <div className="flex justify-between mt-[29px] mb-[29px] w-full">
             <form
                 onSubmit={sendSearchString}
                 className="flex border-2 rounded-lg text-sm"
@@ -54,7 +54,7 @@ function Header() {
                             src={userPicUrl}
                         />
                     </div>
-                    <div className="mr-[29px] text-[18px] cursor-pointer">
+                    <div className="text-[18px] cursor-pointer">
                         {userName}
                     </div>
                 </div>

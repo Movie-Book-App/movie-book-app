@@ -28,7 +28,7 @@ function SideBar() {
         } else {
             return (
                 <div
-                    className="btn-sideBar hover:bg-[#4A82F6]"
+                    className=" btn-sideBar hover:bg-[#4A82F6]"
                     onClick={() => setIsOpen(!isOpen)}
                 >
                     <div className="icon-sideBar">
@@ -40,8 +40,8 @@ function SideBar() {
         }
     }
     return (
-        <div className="w-[212px] bg-[white] flex flex-col justify-between rounded-l-[35px] border">
-            <div className="mt-[41px] ml-[37px] mb-[57px] text-[28px] ">
+        <div className="w-[212px] bg-[white] flex flex-col justify-between rounded-l-[35px] border-r-2 mr-[29px] h-full">
+            <div className="mt-[41px] ml-[37px] mb-[57px] text-[28px]">
                 LOGO
             </div>
             <div className="btn-top">
