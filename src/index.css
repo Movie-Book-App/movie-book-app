@@ -2,3 +2,36 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  #root {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .btn-top,
+  .btn-bottom {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: 90px;
+    width: 190px;
+  }
+  .btn-sideBar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 52px;
+    margin-bottom: 28px;
+    border-radius: 0 35px 35px 0;
+  }
+  .btn-sideBar .icon-sideBar {
+    margin-left: 37px;
+    font-size: 18px;
+  }
+  .btn-sideBar .title-sideBar {
+    margin-left: 12px;
+  }
+}
