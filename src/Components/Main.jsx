@@ -1,9 +1,9 @@
-import React from 'react'
+import React from "react"
 
 function Main() {
     return (
-        <div>
-            
+        <div className="ml-[29px]">
+            <p>?!?!?!?!?!?</p>
         </div>
     )
 }
