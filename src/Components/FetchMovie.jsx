@@ -13,8 +13,7 @@ function FetchMovie() {
                 method: "GET",
                 headers: {
                     "x-rapidapi-host": "imdb8.p.rapidapi.com",
-                    "x-rapidapi-key":
-                        "f19e814179msh7e2cfc12d1ec4bfp173f9bjsn1ec0cc87da34",
+                    "x-rapidapi-key": "",
                 },
             }
         )
