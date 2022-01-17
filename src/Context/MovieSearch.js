@@ -1,19 +1,9 @@
-// import useAppData from "./DataStorage"
-
-// const {} = useAppData()
-
-import {useState} from "react";
-
-import React from 'react'
+import { useState } from "react"
 
 function MovieSearch() {
+    const [globalSearchString, setGlobalSearchString] = useState("")
 
-    const [globalSearchString, setGlobalSearchString] = useState("");
-
-    return(
-        [globalSearchString, setGlobalSearchString]
-    )
-
+    return [globalSearchString, setGlobalSearchString]
 }
 
 export default MovieSearch
