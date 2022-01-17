@@ -18,7 +18,7 @@ function SideBar() {
         if (!isOpen) {
             return (
                 <div
-                    className="btn-sideBar hover:bg-[#4A82F6]"
+                    className="btn-sideBar hover:bg-[#4A82F6] cursor-pointer"
                     onClick={() => setIsOpen(!isOpen)}
                 >
                     <div className="icon-sideBar">
@@ -30,7 +30,7 @@ function SideBar() {
         } else {
             return (
                 <div
-                    className=" btn-sideBar hover:bg-[#4A82F6]"
+                    className=" btn-sideBar hover:bg-[#4A82F6] cursor-pointer"
                     onClick={() => setIsOpen(!isOpen)}
                 >
                     <div className="icon-sideBar">
