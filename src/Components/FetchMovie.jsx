@@ -21,13 +21,16 @@ function FetchMovie() {
         )
             .then((response) => response.json())
             .then((data) => {
-                const movieFiltered = data.results.filter((cV) => cV.title)
+                const movieFiltered = data.results.filter((cV) => {
+                    return cV.title && cV.titleType !== "videoGame"
+                })
                 const movieList = movieFiltered.map((cV) => {
                     return {
                         title: cV.title,
                         year: cV.year,
                         type: cV.titleType,
                         poster: cV.image ? cV.image.url : "",
+                        runningTime: cV.runningTimeInMinutes,
                         actors: cV.principals
                             ? cV.principals
                             : [{ name: "Not Found" }],
@@ -44,17 +47,28 @@ function FetchMovie() {
                 })
                 .join(", ")
 
+            function timeConvert(n) {
+                let num = n
+                let hours = num / 60
+                let rhours = Math.floor(hours)
+                let minutes = (hours - rhours) * 60
+                let rminutes = Math.round(minutes)
+                return rhours + "h " + rminutes + "m"
+            }
             return (
-                <div className="flex items-center p-4 bg-white border-2 border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 h-[300px]">
+                <div className="flex items-center p-4 bg-white border-2 border-gray-200 rounded-lg shadow-sm bg-gray-800 h-[300px]">
                     <img
                         src={cV.poster}
                         alt=""
                         className="w-1/5 rounded-md bg-cover h-full bg-center object-scale-down"
                     />
                     <div className="flex flex-col ml-5 h-full w-4/5">
-                        <p className="text-xl font-semibold mb-2 text-white">
-                            Title: {cV.title}
-                        </p>
+                        <div className="flex text-white justify-between">
+                            <p className="text-xl font-semibold mb-2">
+                                Title: {cV.title}
+                            </p>
+                            <span>{timeConvert(cV.runningTime)}</span>
+                        </div>
                         <p className="mt-2 text-white">Type: {cV.type}</p>
                         <p className="mt-3 text-white">
                             Year: {cV.year ? cV.year : "Not Found"}
