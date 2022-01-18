@@ -4,9 +4,13 @@ import { useState, useEffect } from "react"
 import { v4 as uuidv4 } from "uuid" // uuidv4();
 import { MdOutlineFavoriteBorder } from "react-icons/md"
 import { MdOutlineStarBorderPurple500 } from "react-icons/md"
+import YouTube from "react-youtube"
+import movieTrailer from "movie-trailer"
+
 function FetchMovie() {
     const [movieInfo, setMovieInfo] = useState([])
     const { globalSearchString } = useAppData()
+    console.log(globalSearchString)
 
     useEffect(() => {
         fetch(
@@ -15,10 +19,12 @@ function FetchMovie() {
                 method: "GET",
                 headers: {
                     "x-rapidapi-host": "imdb8.p.rapidapi.com",
-                    "x-rapidapi-key": "",
+                    "x-rapidapi-key":
+                        "1eb09c7899msh96e9fd5b668892dp116fc8jsn8ba173bfc135",
                 },
             }
         )
+
             .then((response) => response.json())
             .then((data) => {
                 const movieFiltered = data.results.filter((cV) => cV.title)
@@ -36,6 +42,16 @@ function FetchMovie() {
                 setMovieInfo(movieList)
             })
     }, [globalSearchString])
+    
+    const opts = {
+        height: "390",
+        width: "640",
+        playerVars: {
+            // https://developers.google.com/youtube/player_parameters
+            autoplay: 1,
+        },
+    }
+
     function handleList() {
         return movieInfo.map((cV) => {
             const actorList = cV.actors
@@ -50,6 +66,10 @@ function FetchMovie() {
                         src={cV.poster}
                         alt=""
                         className="w-1/5 rounded-md bg-cover h-full bg-center object-scale-down"
+                    />
+                    <YouTube
+                        videoId="2g811Eo7K8U"
+                        opts={opts}
                     />
                     <div className="flex flex-col ml-5 h-full w-4/5">
                         <p className="text-xl font-semibold mb-2 text-white">

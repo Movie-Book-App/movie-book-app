@@ -16,9 +16,10 @@ function App() {
                 <Header />
                 <Routes>
                     <Route path="main" element={<Main />} />
+                    <Route path="search" element={<FetchMovie />} />
                     <Route path="collection" element={<Collection />} />
                     <Route path="favorites" element={<Favorites />} />
-                    <Route path="*" element={<Navigate replace to="/main" />} />  
+                    <Route path="*" element={<Navigate replace to="/main" />} />
                 </Routes>
             </div>
         </div>
