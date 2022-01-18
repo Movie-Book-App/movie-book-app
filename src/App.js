@@ -1,11 +1,10 @@
-import { v4 as uuidv4 } from "uuid" // uuidv4();
 import SideBar from "./Components/SideBar"
 import Header from "./Components/Header"
 import Main from "./Components/Main"
+import FetchMovie from "./Components/FetchMovie"
 import Collection from "./Components/Collection"
 import Favorites from "./Components/Favorites"
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-
 
 function App() {
     return (
@@ -13,7 +12,7 @@ function App() {
             <div>
                 <SideBar />
             </div>
-            <div className="flex flex-col mr-[27px]">
+            <div className="flex flex-col mr-[27px] w-full">
                 <Header />
                 <Routes>
                     <Route path="main" element={<Main />} />

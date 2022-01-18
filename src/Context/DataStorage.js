@@ -5,12 +5,13 @@ import UserContext from "./UserContext"
 const DataStorage = createContext()
 
 function AppState(props) {
-    const searchContext = MovieSearch();
-    const [globalSearchString, setGlobalSearchString] = searchContext;
+
+    const [globalSearchString, setGlobalSearchString] = MovieSearch()   
     const userContext = UserContext();
     const [userObj, dispatchUserObj] = userContext;
     return (
         <DataStorage.Provider value={{ globalSearchString, setGlobalSearchString, userObj, dispatchUserObj }}>{props.children}</DataStorage.Provider>
+
     )
 }
 function useAppData() {

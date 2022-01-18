@@ -11,8 +11,6 @@ import SidebarBtn from "./Sidebar-btn"
 import { useAppData } from "../Context/DataStorage";
 import { Link } from "react-router-dom";
 
-
-
 function SideBar() {
     const [isOpen, setIsOpen] = useState(false)
     const { userObj, dispatchUserObj } = useAppData();
