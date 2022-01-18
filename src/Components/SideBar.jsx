@@ -4,15 +4,22 @@ import { BsBookmarkPlus, BsBookmarkStar, BsBook } from "react-icons/bs"
 import { FiSettings, FiLogIn, FiLogOut, FiTv } from "react-icons/fi"
 import { FaUserFriends } from "react-icons/fa"
 import { BiCameraMovie } from "react-icons/bi"
+import { SiDcentertainment } from "react-icons/si"
 import { useState } from "react"
 import { GoCalendar } from "react-icons/go"
 import SidebarBtn from "./Sidebar-btn"
 import { useAppData } from "../Context/DataStorage";
+import { Link } from "react-router-dom";
+
 
 
 function SideBar() {
     const [isOpen, setIsOpen] = useState(false)
-    const { dispatchUserObj } = useAppData();
+    const { userObj, dispatchUserObj } = useAppData();
+
+    // const medium = userObj.mediaType.toLowerCase()
+    // console.log(medium);
+    // console.log(userObj);
 
     function handleOpen() {
         if (!isOpen) {
@@ -50,16 +57,25 @@ function SideBar() {
                 <SidebarBtn icon={<BsBook />} title="Books" type="media" onButton={() => dispatchUserObj({ type: "change media type", medium: "Books" })} />
                 <SidebarBtn icon={<BiCameraMovie />} title="Movies" type="media" onButton={() => dispatchUserObj({ type: "change media type", medium: "Movies" })} />
                 <SidebarBtn icon={<FiTv />} title="TV-Shows" type="media" onButton={() => dispatchUserObj({ type: "change media type", medium: "TV-Shows" })} />
+                <SidebarBtn icon={<SiDcentertainment />} title="Comics" type="media" onButton={() => dispatchUserObj({ type: "change media type", medium: "Comics" })} />
             </div>
             <div className="btn-top">
-                <SidebarBtn icon={<MdOutlineDashboard />} title="Dashboard" type="subMenu" onButton={() => dispatchUserObj({ type: "change sub menu", medium: "Dashboard" })} />
-                <SidebarBtn icon={<BsBookmarkPlus />} title="My Collection" type="subMenu" onButton={() => dispatchUserObj({ type: "change sub menu", medium: "My Collection" })} />
-                <SidebarBtn icon={<BsBookmarkStar />} title="Favorites" type="subMenu" onButton={() => dispatchUserObj({ type: "change sub menu", medium: "Favorites" })} />
-                <SidebarBtn icon={<GoCalendar />} title="Coming Soon" type="subMenu" onButton={() => dispatchUserObj({ type: "change sub menu", medium: "Coming Soon" })} />
-                <SidebarBtn icon={<FaUserFriends />} title="Friends" type="subMenu" onButton={() => dispatchUserObj({ type: "change sub menu", medium: "Friends" })} />
+                <nav>
+                    <Link to="/main" >
+                        <SidebarBtn icon={<MdOutlineDashboard />} title="Dashboard" type="subMenu" onButton={() => dispatchUserObj({ type: "change sub menu", medium: "Dashboard" })} />
+                    </Link>
+                    <Link to="collection" >
+                        <SidebarBtn icon={<BsBookmarkPlus />} title="My Collection" type="subMenu" onButton={() => dispatchUserObj({ type: "change sub menu", medium: "My Collection" })} />
+                    </Link>
+                    <Link to="/favorites" >
+                        <SidebarBtn icon={<BsBookmarkStar />} title="Favorites" type="subMenu" onButton={() => dispatchUserObj({ type: "change sub menu", medium: "Favorites" })} />
+                    </Link>
+                    {/* <SidebarBtn icon={<GoCalendar />} title="Coming Soon" type="subMenu" onButton={() => dispatchUserObj({ type: "change sub menu", medium: "Coming Soon" })} />
+                    <SidebarBtn icon={<FaUserFriends />} title="Friends" type="subMenu" onButton={() => dispatchUserObj({ type: "change sub menu", medium: "Friends" })} /> */}
+                </nav>
             </div>
             <div className="btn-bottom">
-                <SidebarBtn icon={<FiSettings />} title="Settings" type="subMenu" onButton={() => dispatchUserObj({ type: "change sub menu", medium: "Settings" })} />
+                {/* <SidebarBtn icon={<FiSettings />} title="Settings" type="subMenu" onButton={() => dispatchUserObj({ type: "change sub menu", medium: "Settings" })} /> */}
                 {handleOpen()}
             </div>
         </div>

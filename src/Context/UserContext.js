@@ -36,9 +36,9 @@ function UserContext() {
 
     useEffect(() => {
         const restoredUserObj = localStorage.getItem("movieBookApp");
-        const startUserObj = restoredUserObj ? JSON.parse(restoredUserObj) : testObj;
+        const startUserObj = restoredUserObj && restoredUserObj.length > 2 ? JSON.parse(restoredUserObj) : testObj;
         dispatchUserObj({type: "restore", data: startUserObj})
-    }, {});
+    }, []);
 
 
     useEffect(() => {
