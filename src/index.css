@@ -9,14 +9,18 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        margin-top: 60px;
+    }
+
+    .App {
+        height: 90vh;
     }
     .btn-top,
-    .btn-bottom {
+    .btn-bottom,
+    .btn-mediaType {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        margin-bottom: 90px;
+        margin-bottom: 50px;
         width: 190px;
     }
     .btn-sideBar {
