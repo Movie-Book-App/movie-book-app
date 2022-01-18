@@ -1,14 +1,21 @@
-import React from "react"
+import React, {useRef} from "react"
+import { useDraggable } from "react-use-draggable-scroll"
 import Comic from "./Comic"
-import { useHorizontalScroll } from "../utilities/sideScroll"
 
 function Comics() {
-    const scrollRef = useHorizontalScroll()
+    const ref = useRef(null)
+    const { events } = useDraggable(ref)
+
     return (
         <div
             className="flex flex-row overflow-x-scroll scrollbar-hide rounded-xl"
-            ref={scrollRef}
+            ref={ref}
+            {...events}
         >
+            <Comic />
+            <Comic />
+            <Comic />
+            <Comic />
             <Comic />
             <Comic />
             <Comic />
