@@ -4,11 +4,7 @@ import { useAppData } from "../Context/DataStorage"
 
 function Header() {
     const [searchString, setSearchString] = useState("")
-
-    const userName = "Andreas Langner"
-    const userPicUrl = "https://avatars.githubusercontent.com/u/85481701?v=4"
-
-    const { globalSearchString, setGlobalSearchString } = useAppData()
+    const { globalSearchString, setGlobalSearchString, userObj } = useAppData()
 
     const changeHandler = (event) => {
         const input = event.target.value
@@ -51,11 +47,11 @@ function Header() {
                         <img
                             className="w-[46px] rounded-full cursor-pointer hover:brightness-75"
                             alt="User"
-                            src={userPicUrl}
+                            src={userObj.picture}
                         />
                     </div>
                     <div className="text-[18px] cursor-pointer">
-                        {userName}
+                        {userObj.name}
                     </div>
                 </div>
             </div>

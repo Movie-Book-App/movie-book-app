@@ -5,7 +5,7 @@ import InfoBarRight from "./InfoBarRight"
 
 function Main() {
     return (
-        <div className="max-w-[1040px] ml-[27px] mr-[27px] md:mx-auto">
+        <div className="max-w-[1040px] ml-[27px] mr-[27px] md:mx-auto overflow-scroll">
             <div className="flex justify-between gap-2">
                 <Banner />
                 <InfoBarRight />
