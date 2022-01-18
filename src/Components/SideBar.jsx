@@ -51,7 +51,6 @@ function SideBar() {
                 <SidebarBtn icon={<BsBookmarkStar />} title="Favorites" />
                 <SidebarBtn icon={<GoCalendar />} title="Comming Soon" />
                 <SidebarBtn icon={<FaUserFriends />} title="Friends" />
-                <FetchMovie />
             </div>
             <div className="btn-bottom">
                 <SidebarBtn icon={<FiSettings />} title="Settings" />

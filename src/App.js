@@ -1,6 +1,8 @@
 import SideBar from "./Components/SideBar"
 import Header from "./Components/Header"
 import Main from "./Components/Main"
+import { Routes, Route } from "react-router-dom"
+import FetchMovie from "./Components/FetchMovie"
 
 function App() {
     return (
@@ -8,10 +10,14 @@ function App() {
             <div>
                 <SideBar />
             </div>
-            <div className="flex flex-col mr-[27px]">
+            <div className="flex flex-col mr-[27px] w-full">
                 <Header />
                 <Main className="" />
+                <FetchMovie />
             </div>
+            <Routes>
+                <Route path="/movie" element={<FetchMovie />} />
+            </Routes>
         </div>
     )
 }
