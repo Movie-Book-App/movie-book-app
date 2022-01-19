@@ -9,10 +9,10 @@ import YouTube from "react-youtube"
 import movieTrailer from "movie-trailer"
 
 function FetchMovie() {
+    const [trailerUrl, setTrailerUrl] = useState("")
     const [movieInfo, setMovieInfo] = useState([])
     const { globalSearchString, list, onEdit, onAdd } = useAppData()
     console.log(movieInfo)
-    const [trailerUrl, setTrailerUrl] = useState("")
 
 
 
@@ -33,7 +33,8 @@ function FetchMovie() {
                         method: "GET",
                         headers: {
                             "x-rapidapi-host": "imdb8.p.rapidapi.com",
-                            "x-rapidapi-key": "",
+                            "x-rapidapi-key":
+                                "1eb09c7899msh96e9fd5b668892dp116fc8jsn8ba173bfc135",
                         },
                     }
                 )
@@ -47,7 +48,6 @@ function FetchMovie() {
                     return {
                         id: uuidv4(),
                         active: false,
-
                         title: cV.title,
                         year: cV.year,
                         type: cV.titleType,
@@ -59,9 +59,6 @@ function FetchMovie() {
                     }
                 })
         
-    
-    
-
     
     
                 onAdd(movieList)
@@ -98,6 +95,8 @@ function FetchMovie() {
 
     // mit der folgenden Funktion wird für jeden Film ein Card erstellt.
     function handleList() {
+
+
         return list.map((cV) => {
             // hier wird das Actor-Array verkürzt (nur die Namen der Schauspieler werden angezeigt) und anschließend als String ausgegeben.
             const actorList = cV.actors
