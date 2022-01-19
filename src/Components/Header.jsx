@@ -1,19 +1,24 @@
 import React, { useState } from "react"
 import { BsSearch, BsBell } from "react-icons/bs"
 import { useAppData } from "../Context/DataStorage"
+import { useNavigate } from 'react-router-dom';
 
 function Header() {
     const [searchString, setSearchString] = useState("")
     const { globalSearchString, setGlobalSearchString, userObj } = useAppData()
 
+    const medium = userObj.mediaType
+
     const changeHandler = (event) => {
         const input = event.target.value
         setSearchString(input)
     }
+    const history = useNavigate()
 
     function sendSearchString(event) {
         event.preventDefault()
         setGlobalSearchString(searchString)
+        history(`${medium}/Search`);
     }
 
     return (

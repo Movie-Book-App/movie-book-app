@@ -1,31 +1,39 @@
 import React from "react"
 import { useAppData } from "../Context/DataStorage"
-import { useState, useEffect } from "react"
+import { useEffect } from "react"
 import { v4 as uuidv4 } from "uuid" // uuidv4();
-import { MdOutlineFavoriteBorder } from "react-icons/md"
 import { MdOutlineStarBorderPurple500 } from "react-icons/md"
+import { AiFillHeart } from "react-icons/ai"
 function FetchMovie() {
-    const [movieInfo, setMovieInfo] = useState([])
-    const { globalSearchString } = useAppData()
+    // hier werden die Daten (Sucheingabe, useReducer(lis), onEdit & onAdd geben ein dispatch weiter) aus dem Context ausgelesen.
+    const { globalSearchString, list, onEdit, onAdd } = useAppData()
 
+    // hier wird die Funktion fetchData aufgerufen, sobald die Seite geladen wird und 'globalSearchString' sich ändert.
     useEffect(() => {
-        fetch(
-            `https://imdb8.p.rapidapi.com/title/find?q=${globalSearchString}`,
-            {
-                method: "GET",
-                headers: {
-                    "x-rapidapi-host": "imdb8.p.rapidapi.com",
-                    "x-rapidapi-key": "cb475085a3msheef833f91761e93p14b00djsn63c7bff08c06",
-                },
-            }
-        )
-            .then((response) => response.json())
-            .then((data) => {
-                const movieFiltered = data.results.filter((cV) => {
+        // mit der folgenden Funktion werden die Filme gefetcht; ein Array, movieList, angelegt. Dieses Array beinhaltet für jeden Film ein Objekt mit Daten.
+        // Anschließend wird das Objekt mit dispatch an den reducer weitergegeben.
+        async function fetchData() {
+            try {
+                const input = await fetch(
+                    `https://imdb8.p.rapidapi.com/title/find?q=${globalSearchString}`,
+                    {
+                        method: "GET",
+                        headers: {
+                            "x-rapidapi-host": "imdb8.p.rapidapi.com",
+                            "x-rapidapi-key": "",
+                        },
+                    }
+                )
+                const inputToJson = await input.json()
+                // Filter: alle Einträge, die keinen Namen haben und videoGame sind, werden aus dem Array entfernt.
+                const movieFiltered = inputToJson.results.filter((cV) => {
                     return cV.title && cV.titleType !== "videoGame"
                 })
+
                 const movieList = movieFiltered.map((cV) => {
                     return {
+                        id: uuidv4(),
+                        active: false,
                         title: cV.title,
                         year: cV.year,
                         type: cV.titleType,
@@ -36,17 +44,25 @@ function FetchMovie() {
                             : [{ name: "Not Found" }],
                     }
                 })
-                setMovieInfo(movieList)
-            })
+                onAdd(movieList)
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        fetchData()
     }, [globalSearchString])
+
+    // mit der folgenden Funktion wird für jeden Film ein Card erstellt.
     function handleList() {
-        return movieInfo.map((cV) => {
+        return list.map((cV) => {
+            // hier wird das Actor-Array verkürzt (nur die Namen der Schauspieler werden angezeigt) und anschließend als String ausgegeben.
             const actorList = cV.actors
                 .map((cV) => {
                     return cV.name
                 })
                 .join(", ")
 
+            // mit der folgenden Funktion wird die Länge des Films in Minuten in Stunden und Minuten umgerechnet.
             function timeConvert(n) {
                 let num = n
                 let hours = num / 60
@@ -55,8 +71,12 @@ function FetchMovie() {
                 let rminutes = Math.round(minutes)
                 return rhours + "h " + rminutes + "m"
             }
+
             return (
-                <div className="flex items-center p-4 bg-white border-2 border-gray-200 rounded-lg shadow-sm bg-gray-800 h-[300px]">
+                <div
+                    key={uuidv4()}
+                    className="flex items-center p-4 bg-white border-2 border-gray-200 rounded-lg shadow-sm bg-gray-800 h-[300px]"
+                >
                     <img
                         src={cV.poster}
                         alt=""
@@ -77,7 +97,13 @@ function FetchMovie() {
                             Stars: {actorList}
                         </p>
                         <div className="mt-[80px] text-[30px] flex justify-between w-full">
-                            <MdOutlineFavoriteBorder className="text-white" />
+                            <AiFillHeart
+                                key={uuidv4()}
+                                className={
+                                    !cV.active ? "text-white" : "text-rose-600"
+                                }
+                                onClick={() => onEdit(cV.id)}
+                            />
                             <div className="flex mr-5 text-white">
                                 <MdOutlineStarBorderPurple500 />
                                 <MdOutlineStarBorderPurple500 />

@@ -9,7 +9,7 @@ import { useState } from "react"
 import { GoCalendar } from "react-icons/go"
 import SidebarBtn from "./Sidebar-btn"
 import { useAppData } from "../Context/DataStorage";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function SideBar() {
     const [isOpen, setIsOpen] = useState(false)
@@ -17,8 +17,12 @@ function SideBar() {
 
     let subMenu
     subMenu = userObj.subMenu
-    // test.toLowerCase()
-    console.log(subMenu);
+    subMenu = subMenu === "My Collection" ? "Collection" : subMenu
+    subMenu = subMenu === "Dashboard" ? "Main" : subMenu
+    // console.log(subMenu);
+
+    const medium = userObj.mediaType
+    // console.log(medium);
 
     function handleOpen() {
         if (!isOpen) {
@@ -54,29 +58,29 @@ function SideBar() {
             </div>
             <div className="btn-mediaType">
                 <nav>
-                    <Link to="Books/Main" >
+                    <Link to={`Books/${subMenu}`} >
                         <SidebarBtn icon={<BsBook />} title="Books" type="media" onButton={() => dispatchUserObj({ type: "change media type", medium: "Books" })} />
                     </Link>
-                    <Link to="Movies/Main" >
+                    <Link to={`Movies/${subMenu}`} >
                         <SidebarBtn icon={<BiCameraMovie />} title="Movies" type="media" onButton={() => dispatchUserObj({ type: "change media type", medium: "Movies" })} />
                     </Link>
-                    <Link to="TV-Shows/Main" >
+                    <Link to={`TV-Shows/${subMenu}`} >
                         <SidebarBtn icon={<FiTv />} title="TV-Shows" type="media" onButton={() => dispatchUserObj({ type: "change media type", medium: "TV-Shows" })} />
                     </Link>
-                    <Link to="Comics/Main" >
+                    <Link to={`Comics/${subMenu}`} >
                         <SidebarBtn icon={<SiDcentertainment />} title="Comics" type="media" onButton={() => dispatchUserObj({ type: "change media type", medium: "Comics" })} />
                     </Link>
                 </nav>
             </div>
             <div className="btn-top">
                 <nav>
-                    <Link to="Books/Main" >
+                    <Link to={`${medium}/Main`} >
                         <SidebarBtn icon={<MdOutlineDashboard />} title="Dashboard" type="subMenu" onButton={() => dispatchUserObj({ type: "change sub menu", medium: "Dashboard" })} />
                     </Link>
-                    <Link to="Books/Collection" >
+                    <Link to={`${medium}/Collection`} >
                         <SidebarBtn icon={<BsBookmarkPlus />} title="My Collection" type="subMenu" onButton={() => dispatchUserObj({ type: "change sub menu", medium: "My Collection" })} />
                     </Link>
-                    <Link to="Books/Favorites" >
+                    <Link to={`${medium}/Favorites`} >
                         <SidebarBtn icon={<BsBookmarkStar />} title="Favorites" type="subMenu" onButton={() => dispatchUserObj({ type: "change sub menu", medium: "Favorites" })} />
                     </Link>
                     {/* <SidebarBtn icon={<GoCalendar />} title="Coming Soon" type="subMenu" onButton={() => dispatchUserObj({ type: "change sub menu", medium: "Coming Soon" })} />

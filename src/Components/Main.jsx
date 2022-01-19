@@ -2,7 +2,7 @@ import React from "react"
 import Banner from "./Banner"
 import Comics from "./Comics"
 import InfoBarRight from "./InfoBarRight"
-import { useLocation, useMatch, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 function Main() {
     
