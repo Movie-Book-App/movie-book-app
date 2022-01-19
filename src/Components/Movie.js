@@ -37,7 +37,7 @@ function Movie(props) {
             <div className="flex flex-col ml-5 h-full w-4/5">
                 <div className="flex text-white justify-between">
                     <p className="text-xl font-semibold mb-2">Title: {title}</p>
-                    <span>{timeConvert(runningTime)}</span>
+                    <span>{isNaN(runningTime)?"not available" : timeConvert(runningTime)}</span>
                 </div>
                 <p className="mt-2 text-white">Type: {type}</p>
                 <p className="mt-3 text-white">

@@ -1,6 +1,7 @@
 import React, {useRef} from "react"
 import { useDraggable } from "react-use-draggable-scroll"
 import Comic from "./Comic"
+import FetchMovie from "./FetchMovie"
 
 function Comics() {
     const ref = useRef(null)
@@ -25,6 +26,9 @@ function Comics() {
             <Comic />
             <Comic />
             <Comic />
+
+            
+            
         </div>
     )
 }

@@ -1,6 +1,8 @@
 import React from "react"
 import Banner from "./Banner"
 import Comics from "./Comics"
+import FetchMovie from "./FetchMovie"
+
 import InfoBarRight from "./InfoBarRight"
 import { useParams } from "react-router-dom"
 
@@ -17,6 +19,8 @@ function Main() {
             <h3 className="font-bold text-xl mb-4 mt-4">Top Rated Comics</h3>
 
             <Comics />
+
+            <FetchMovie />            
         </div>
     )
 }
