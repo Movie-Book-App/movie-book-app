@@ -15,11 +15,19 @@ function App() {
             <div className="flex flex-col mr-[27px] w-full">
                 <Header />
                 <Routes>
-                    <Route path="main" element={<Main />} />
-                    <Route path="collection" element={<Collection />} />
-                    <Route path="favorites" element={<Favorites />} />
-                    <Route path="search" element={<FetchMovie />} />
-                    <Route path="*" element={<Navigate replace to="/main" />} />
+                    {/* <Route path="main" element={<Main />} /> */}
+                    <Route path=":medium/Main" element={<Main />} />
+                    <Route path=":medium/Main/*" element={<Main />} />
+                    
+                    <Route path=":medium/Collection" element={<Collection />} />
+                    <Route path=":medium/Collection/*" element={<Collection />} />
+
+                    <Route path=":medium/Favorites" element={<Favorites />} />
+                    <Route path=":medium/Favorites/*" element={<Favorites />} />
+
+                    <Route path=":medium/Search" element={<FetchMovie />} />
+
+                    <Route path="*" element={<Navigate replace to="Books/Main" />} />
                 </Routes>
             </div>
         </div>

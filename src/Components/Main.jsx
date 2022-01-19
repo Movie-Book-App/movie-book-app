@@ -2,8 +2,13 @@ import React from "react"
 import Banner from "./Banner"
 import Comics from "./Comics"
 import InfoBarRight from "./InfoBarRight"
+import { useLocation, useMatch, useParams } from "react-router-dom";
 
 function Main() {
+    
+    const neu = useParams();
+    console.log(neu);
+
     return (
         <div className="max-w-[1040px] ml-[27px] mr-[27px] md:mx-auto overflow-scroll">
             <div className="flex justify-between gap-2">
