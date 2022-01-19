@@ -41,7 +41,7 @@ function App() {
 
                     <Route path="Movies/Search" element={<FetchMovie />} />
                     <Route path="TV-Shows/Search" element={<FetchMovie />} />
-                    <Route path="Comics/Search" element={<FetchComics />} />
+                    <Route path="Comics/Search" element={<FetchBooks />} />
                     <Route path="Books/Search" element={<FetchBooks />} />
 
                     <Route
