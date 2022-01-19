@@ -19,8 +19,7 @@ function FetchMovie() {
                         method: "GET",
                         headers: {
                             "x-rapidapi-host": "imdb8.p.rapidapi.com",
-                            "x-rapidapi-key":
-                                "1eb09c7899msh96e9fd5b668892dp116fc8jsn8ba173bfc135",
+                            "x-rapidapi-key": "",
                         },
                     }
                 )
@@ -38,7 +37,9 @@ function FetchMovie() {
                         year: cV.year,
                         type: cV.titleType,
                         poster: cV.image ? cV.image.url : "",
-                        runningTime: cV.runningTimeInMinutes?cV.runningTimeInMinutes:"not available",
+                        runningTime: cV.runningTimeInMinutes
+                            ? cV.runningTimeInMinutes
+                            : "not available",
                         actors: cV.principals
                             ? cV.principals
                             : [{ name: "Not Found" }],
@@ -60,7 +61,6 @@ function FetchMovie() {
     useEffect(() => {
         localStorage.setItem("Movies-List", JSON.stringify(list))
     }, [list])
-
 
     return (
         <div className="grid gap-6 mb-8 md:grid-cols-1 lg:grid-cols-1 w-full overflow-scroll h-[900px]">
