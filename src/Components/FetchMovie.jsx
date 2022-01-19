@@ -2,8 +2,8 @@ import React from "react"
 import { useAppData } from "../Context/DataStorage"
 import { useEffect } from "react"
 import { v4 as uuidv4 } from "uuid" // uuidv4();
+import { handleList } from "./CreateItem"
 
-import Movie from "./Movie"
 function FetchMovie() {
     // hier werden die Daten (Sucheingabe, useReducer(lis), onEdit & onAdd geben ein dispatch weiter) aus dem Context ausgelesen.
     const { globalSearchString, list, onAdd } = useAppData()
@@ -38,7 +38,7 @@ function FetchMovie() {
                         year: cV.year,
                         type: cV.titleType,
                         poster: cV.image ? cV.image.url : "",
-                        runningTime: cV.runningTimeInMinutes,
+                        runningTime: cV.runningTimeInMinutes?cV.runningTimeInMinutes:"not available",
                         actors: cV.principals
                             ? cV.principals
                             : [{ name: "Not Found" }],
@@ -61,16 +61,11 @@ function FetchMovie() {
         localStorage.setItem("Movies-List", JSON.stringify(list))
     }, [list])
 
-    // mit der folgenden Funktion wird für jeden Film ein Card erstellt.
-    function handleList() {
-        return list.map((cV) => {
-            return <Movie item={cV} />
-        })
-    }
 
     return (
         <div className="grid gap-6 mb-8 md:grid-cols-1 lg:grid-cols-1 w-full overflow-scroll h-[900px]">
-            {handleList()}
+            {/* mit der folgenden Funktion wird für jeden Film ein Card erstellt. */}
+            {handleList(list)}
         </div>
     )
 }
