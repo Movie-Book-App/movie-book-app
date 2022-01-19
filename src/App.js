@@ -22,8 +22,6 @@ function App() {
                     <Route path="books" element={<BookList />} />
                     <Route path="collection" element={<Collection />} />
                     <Route path="favorites" element={<Favorites />} />
-
-                    <Route path="search" element={<FetchMovie />} />
                     <Route path="*" element={<Navigate replace to="/main" />} />
                 </Routes>
             </div>
