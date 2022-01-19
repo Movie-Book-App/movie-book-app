@@ -1,9 +1,14 @@
-import React from "react"
+import React, {useState} from "react"
 import { v4 as uuidv4 } from "uuid" // uuidv4();
 import { MdOutlineStarBorderPurple500 } from "react-icons/md"
 import { AiFillHeart } from "react-icons/ai"
 import { useAppData } from "../Context/DataStorage"
+import YouTube from "react-youtube"
+import movieTrailer from "movie-trailer"
+
 function Movie(props) {
+    const { globalSearchString} = useAppData()
+    const [trailerUrl, setTrailerUrl ] = useState("")
     const { id, active, title, year, type, poster, runningTime, actors } =
         props.item
     //const { onEdit } = useAppData()
@@ -24,12 +29,41 @@ function Movie(props) {
         return rhours + "h " + rminutes + "m"
     }
 
+    const opts = {
+        height: "250",
+        width: "400",
+        playerVars: {
+            // https://developers.google.com/youtube/player_parameters
+            autoplay: 1,
+        },
+    }
+
+    const handleClick = (movie) => {
+
+        if(trailerUrl) {
+            setTrailerUrl("")
+        } else {
+            movieTrailer(title || "")
+            .then((url) => {
+                console.log(url)
+                const urlParams = new URLSearchParams(new URL(url).search)
+                
+                setTrailerUrl(urlParams.get("v"))
+            })
+                .catch((error) => {
+                    console.log(error)
+                })
+        }
+    }
+
     return (
         <div
-            key={uuidv4()}
+            
             className="flex items-center p-4 border-2 border-gray-200 rounded-lg shadow-sm bg-gray-800 h-[300px]"
         >
             <img
+                key={id}
+                onClick={() => handleClick(id)}
                 src={poster}
                 alt=""
                 className="w-1/5 rounded-md bg-cover h-full bg-center object-scale-down"
@@ -63,6 +97,7 @@ function Movie(props) {
                     </div>
                 </div>
             </div>
+            {trailerUrl && <YouTube className="ml-3 rounded-xl" videoId={trailerUrl} opts={opts} />}
         </div>
     )
 }
