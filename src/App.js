@@ -9,7 +9,6 @@ import FetchComics from "./Components/FetchComics"
 import FetchBooks from "./Components/FetchBooks"
 import { Routes, Route, Navigate } from "react-router-dom"
 
-
 function App() {
     return (
         <div className="rounded-[35px] min-w-[1292px] mt-[64px] mb-[41px] mx-[74px] border flex App">
@@ -19,14 +18,22 @@ function App() {
             <div className="flex flex-col mr-[27px] w-full">
                 <Header />
                 <Routes>
-
-                    <Route path="fav" element={<FavoriteMovies />} />
-
+                    <Route
+                        path="Movies/Favorites"
+                        element={<FavoriteMovies />}
+                    />
+                    <Route
+                        path="TV-Shows/Favorites"
+                        element={<FavoriteMovies />}
+                    />
                     <Route path=":medium/Main" element={<Main />} />
                     <Route path=":medium/Main/*" element={<Main />} />
-                    
+
                     <Route path=":medium/Collection" element={<Collection />} />
-                    <Route path=":medium/Collection/*" element={<Collection />} />
+                    <Route
+                        path=":medium/Collection/*"
+                        element={<Collection />}
+                    />
 
                     <Route path=":medium/Favorites" element={<Favorites />} />
                     <Route path=":medium/Favorites/*" element={<Favorites />} />
@@ -36,8 +43,10 @@ function App() {
                     <Route path="Comics/Search" element={<FetchComics />} />
                     <Route path="Books/Search" element={<FetchBooks />} />
 
-                    <Route path="*" element={<Navigate replace to="Books/Main" />} />
-
+                    <Route
+                        path="*"
+                        element={<Navigate replace to="Books/Main" />}
+                    />
                 </Routes>
             </div>
         </div>
