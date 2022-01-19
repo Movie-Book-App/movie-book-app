@@ -36,7 +36,7 @@ function FetchMovie() {
                         year: cV.year,
                         type: cV.titleType,
                         poster: cV.image ? cV.image.url : "",
-                        runningTime: cV.runningTimeInMinutes,
+                        runningTime: cV.runningTimeInMinutes?cV.runningTimeInMinutes:"not available",
                         actors: cV.principals
                             ? cV.principals
                             : [{ name: "Not Found" }],
