@@ -4,12 +4,11 @@ import Comics from "./Comics"
 import FetchMovie from "./FetchMovie"
 
 import InfoBarRight from "./InfoBarRight"
-import { useParams } from "react-router-dom";
+import { useParams } from "react-router-dom"
 
 function Main() {
-    
-    const neu = useParams();
-    console.log(neu);
+    const neu = useParams()
+    //console.log(neu);
 
     return (
         <div className="max-w-[1040px] ml-[27px] mr-[27px] md:mx-auto overflow-scroll">

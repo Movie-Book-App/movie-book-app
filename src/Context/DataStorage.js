@@ -1,14 +1,16 @@
 import { createContext, useContext } from "react"
 import MovieSearch from "./MovieSearch"
 import UserContext from "./UserContext"
-import UserFavorite from "./UserFavorite"
+import UserMovieSearchList from "./UserMovieSearchList"
+import UserMovieFavList from "./UserMovieFavList"
 const DataStorage = createContext()
 
 function AppState(props) {
     const [globalSearchString, setGlobalSearchString] = MovieSearch()
     const userContext = UserContext()
     const [userObj, dispatchUserObj] = userContext
-    const [list, onEdit, onAdd] = UserFavorite()
+    const [list, onEdit, onAdd] = UserMovieSearchList()
+    const [fav, onAdd2] = UserMovieFavList()
     return (
         <DataStorage.Provider
             value={{
@@ -19,6 +21,8 @@ function AppState(props) {
                 list,
                 onEdit,
                 onAdd,
+                fav,
+                onAdd2,
             }}
         >
             {props.children}
