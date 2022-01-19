@@ -5,7 +5,7 @@ function UserFavorite() {
     function reducer(array, action) {
         const newArray = [...array]
         if (action.type === "SET_MOVIE_LIST") {
-            const newList = [...newArray, ...action.payload]
+            const newList = [...action.payload]
             return newList
         } else if (action.type === "FAV_MOVIE") {
             return newArray.map((movie) => {
