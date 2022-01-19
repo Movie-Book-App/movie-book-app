@@ -4,7 +4,8 @@ import Main from "./Components/Main"
 import FetchMovie from "./Components/FetchMovie"
 import Collection from "./Components/Collection"
 import Favorites from "./Components/Favorites"
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
+import BookList from "./Components/BookList"
 
 function App() {
     return (
@@ -17,6 +18,7 @@ function App() {
                 <Routes>
                     <Route path="main" element={<Main />} />
                     <Route path="search" element={<FetchMovie />} />
+                    <Route path="books" element={<BookList />} />
                     <Route path="collection" element={<Collection />} />
                     <Route path="favorites" element={<Favorites />} />
                     <Route path="*" element={<Navigate replace to="/main" />} />

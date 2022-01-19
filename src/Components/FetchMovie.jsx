@@ -10,7 +10,10 @@ import movieTrailer from "movie-trailer"
 function FetchMovie() {
     const [movieInfo, setMovieInfo] = useState([])
     const { globalSearchString } = useAppData()
-    console.log(globalSearchString)
+console.log(movieInfo)
+    const [trailerUrl, setTrailerUrl] = useState("")
+
+
 
     useEffect(() => {
         fetch(
@@ -26,10 +29,13 @@ function FetchMovie() {
         )
 
             .then((response) => response.json())
+
             .then((data) => {
+
                 const movieFiltered = data.results.filter((cV) => cV.title)
                 const movieList = movieFiltered.map((cV) => {
                     return {
+                        id: uuidv4(),
                         title: cV.title,
                         year: cV.year,
                         type: cV.titleType,
@@ -39,19 +45,38 @@ function FetchMovie() {
                             : [{ name: "Not Found" }],
                     }
                 })
+        
                 setMovieInfo(movieList)
             })
     }, [globalSearchString])
     
     const opts = {
-        height: "390",
-        width: "640",
+        height: "250",
+        width: "100%",
         playerVars: {
             // https://developers.google.com/youtube/player_parameters
-            autoplay: 1,
+            autoplay: 0,
         },
     }
 
+    const handleClick = (cV) => {
+        if (trailerUrl) {
+            setTrailerUrl("")
+        } else {
+            movieTrailer(cV || "" )
+                .then((url) => {
+                    const urlParams = new URLSearchParams(new URL(url).search)
+                    setTrailerUrl(urlParams.get("v"))
+                    // console.log(urlParams.get("v"))
+
+                })
+                .catch((error) => {
+                    console.error(error)
+                })
+            }
+              
+    }
+    
     function handleList() {
         return movieInfo.map((cV) => {
             const actorList = cV.actors
@@ -60,17 +85,18 @@ function FetchMovie() {
                 })
                 .join(", ")
 
+
+
             return (
                 <div className="flex items-center p-4 bg-white border-2 border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 h-[300px]">
                     <img
+                        key={uuidv4()}
+                        onClick={() => handleClick(cV.title)}
                         src={cV.poster}
                         alt=""
                         className="w-1/5 rounded-md bg-cover h-full bg-center object-scale-down"
                     />
-                    <YouTube
-                        videoId="2g811Eo7K8U"
-                        opts={opts}
-                    />
+
                     <div className="flex flex-col ml-5 h-full w-4/5">
                         <p className="text-xl font-semibold mb-2 text-white">
                             Title: {cV.title}
@@ -93,6 +119,7 @@ function FetchMovie() {
                             </div>
                         </div>
                     </div>
+                    {trailerUrl && <YouTube videoId={trailerUrl} opts={opts} />}
                 </div>
             )
         })
