@@ -6,7 +6,7 @@ import { useAppData } from "../Context/DataStorage"
 function Movie(props) {
     const { id, active, title, year, type, poster, runningTime, actors } =
         props.item
-    const { onEdit } = useAppData()
+    //const { onEdit } = useAppData()
     // hier wird das Actor-Array verkürzt (nur die Namen der Schauspieler werden angezeigt) und anschließend als String ausgegeben.
     const actorList = actors
         .map((cV) => {
@@ -37,7 +37,11 @@ function Movie(props) {
             <div className="flex flex-col ml-5 h-full w-4/5">
                 <div className="flex text-white justify-between">
                     <p className="text-xl font-semibold mb-2">Title: {title}</p>
-                    <span>{isNaN(runningTime)?"not available" : timeConvert(runningTime)}</span>
+                    <span>
+                        {isNaN(runningTime)
+                            ? "not available"
+                            : timeConvert(runningTime)}
+                    </span>
                 </div>
                 <p className="mt-2 text-white">Type: {type}</p>
                 <p className="mt-3 text-white">
@@ -48,7 +52,7 @@ function Movie(props) {
                     <AiFillHeart
                         key={uuidv4()}
                         className={!active ? "text-white" : "text-rose-600"}
-                        onClick={() => onEdit(id)}
+                        onClick={() => props.edit(id)}
                     />
                     <div className="flex mr-5 text-white">
                         <MdOutlineStarBorderPurple500 />

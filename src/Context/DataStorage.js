@@ -10,7 +10,7 @@ function AppState(props) {
     const userContext = UserContext()
     const [userObj, dispatchUserObj] = userContext
     const [list, onEdit, onAdd] = UserMovieSearchList()
-    const [fav, onAdd2] = UserMovieFavList()
+    const [fav, onAddFavList, onEditFavList] = UserMovieFavList()
     return (
         <DataStorage.Provider
             value={{
@@ -22,7 +22,8 @@ function AppState(props) {
                 onEdit,
                 onAdd,
                 fav,
-                onAdd2,
+                onAddFavList,
+                onEditFavList,
             }}
         >
             {props.children}
