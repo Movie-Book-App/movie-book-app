@@ -1,21 +1,12 @@
 import React from "react"
-import { useEffect, useState } from "react"
-import { v4 as uuidv4 } from "uuid" // uuidv4();
-import { AiFillHeart } from "react-icons/ai"
-import { MdOutlineStarBorderPurple500 } from "react-icons/md"
+import { useEffect, useReducer } from "react"
 import { useAppData } from "../Context/DataStorage"
-import Movie from "./Movie"
+import { handleList } from "./CreateItem"
+
 function FavoriteMovies() {
-    const { onEdit } = useAppData()
-    const [favMovie, setFavMovie] = useState([])
-    // liste
-    const [pl, setPl] = useState([])
+    const { list, fav, onAdd2 } = useAppData()
 
     useEffect(() => {
-        // lesen des localStorage - Movies-List
-        const readList = localStorage.getItem("Movies-List")
-        // Movies-List in ein Array umwandeln und an pl übergeben
-        const restoredList = readList ? setPl(JSON.parse(readList)) : []
         // lesen des localStorage - favMovie-Movies
         const restored = localStorage.getItem("favMovie-Movies")
         // favMovie-Movies in ein Array umwandeln
@@ -23,23 +14,14 @@ function FavoriteMovies() {
     }, [])
 
     useEffect(() => {
-        // pl filtern
-        const listFilter = pl.filter((movie) => movie.active === true)
-        // favList in localStorage speichern
-        const newList = [...listFilter]
-        setFavMovie([...favMovie, ...newList])
-    }, [pl])
+        // list filtern --> Ergebnis ist ein Array mit x-Objekten
+        const listFilter = list.filter((movie) => movie.active === true)
+        if (listFilter.length > 0) {
+            onAdd2(listFilter)
+        }
+    }, [list])
 
-    useEffect(() => {
-        localStorage.setItem("favMovie-Movies", JSON.stringify(favMovie))
-    }, [favMovie])
-
-    function handleList() {
-        return favMovie.map((cV) => {
-            return <Movie item={cV} />
-        })
-    }
-    return <div>{handleList()}</div>
+    return <div>{handleList(fav)}</div>
 }
 
 export default FavoriteMovies

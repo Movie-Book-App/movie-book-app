@@ -1,5 +1,5 @@
 import { useReducer } from "react"
-function UserFavorite() {
+function UserMovieSearchList() {
     const [list, dispatch] = useReducer(reducer, [])
 
     function reducer(array, action) {
@@ -27,4 +27,4 @@ function UserFavorite() {
     return [list, onEdit, onAdd]
 }
 
-export default UserFavorite
+export default UserMovieSearchList
