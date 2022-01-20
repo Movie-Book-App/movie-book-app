@@ -1,6 +1,8 @@
 import React from "react"
 import { useAppData } from "../Context/DataStorage"
 import { useEffect } from "react"
+import { v4 as uuidv4 } from "uuid" // uuidv4();
+import test from "../assets/images/Image_not_available.jpeg"
 import { handleList } from "./HandleList"
 import PlaceHolder from "../assets/images/PlaceHolder.png"
 function FetchMovie() {
@@ -19,7 +21,8 @@ function FetchMovie() {
                         method: "GET",
                         headers: {
                             "x-rapidapi-host": "imdb8.p.rapidapi.com",
-                            "x-rapidapi-key": "",
+                            "x-rapidapi-key":
+                                "",
                         },
                     }
                 )
@@ -28,6 +31,7 @@ function FetchMovie() {
                 const movieFiltered = inputToJson.results.filter((cV) => {
                     return cV.title && cV.titleType !== "videoGame"
                 })
+
                 const movieList = movieFiltered?.map((cV) => {
                     return {
                         id: cV.id,

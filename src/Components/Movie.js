@@ -37,9 +37,9 @@ function Movie(props) {
             autoplay: 1,
         },
     }
-
+    
     const handleClick = (movie) => {
-
+        
         if(trailerUrl) {
             setTrailerUrl("")
         } else {
@@ -50,25 +50,28 @@ function Movie(props) {
                 
                 setTrailerUrl(urlParams.get("v"))
             })
-                .catch((error) => {
-                    console.log(error)
-                })
+            .catch((error) => {
+                console.log(error)
+            })
         }
     }
+    
+    
+    console.log(poster)
 
     return (
         <div
             
-            className="flex items-center p-4 border-2 border-gray-200 rounded-lg shadow-sm bg-gray-800 h-[300px]"
+            className="flex items-center p-4 border-2 border-gray-200 rounded-lg shadow-sm bg-gray-800 h-[310px]"
         >
             <img
                 key={id}
                 onClick={() => handleClick(id)}
                 src={poster}
-                alt=""
-                className="w-1/5 rounded-md bg-cover h-full bg-center object-scale-down"
+                alt={title}
+                className="w-1/5 rounded-md bg-cover h-full bg-center object-scale-down hover:scale-105 ease-in-out duration-300"
             />
-            <div className="flex flex-col ml-5 h-full w-4/5">
+            <div className="flex flex-col ml-5 h-full w-[345px]">
                 <div className="flex text-white justify-between">
                     <p className="text-xl font-semibold mb-2">Title: {title}</p>
                     <span>
@@ -88,7 +91,7 @@ function Movie(props) {
                         className={!active ? "text-white" : "text-rose-600"}
                         onClick={() => props.edit(id)}
                     />
-                    <div className="flex mr-5 text-white">
+                    <div className="flex text-white">
                         <MdOutlineStarBorderPurple500 />
                         <MdOutlineStarBorderPurple500 />
                         <MdOutlineStarBorderPurple500 />

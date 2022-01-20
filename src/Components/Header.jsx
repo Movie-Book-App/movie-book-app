@@ -26,11 +26,11 @@ function Header() {
         <div className="flex justify-between mt-[29px] mb-[29px] w-full">
             <form
                 onSubmit={sendSearchString}
-                className="flex border-2 rounded-lg text-sm"
+                className="flex border-2 rounded-lg text-sm "
             >
                 <input
                     type="text"
-                    className="px-4 py-2 w-80 focus:outline-none"
+                    className="px-4 py-2 w-80 focus:w-[610px] duration-500 ease-in-out focus:outline-none"
                     placeholder="Search..."
                     name="searchBar"
                     onChange={changeHandler}
