@@ -21,7 +21,7 @@ function FetchMovie() {
                         headers: {
                             "x-rapidapi-host": "imdb8.p.rapidapi.com",
                             "x-rapidapi-key":
-                                "e5dd24af62mshdfc9f506eec1ff3p1c0da7jsn671c8947b3ba",
+                                "42416b6866msh7db68447b38480fp1b1615jsn34f517b45bab",
                         },
                     }
                 )
