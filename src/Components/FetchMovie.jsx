@@ -3,6 +3,7 @@ import { useAppData } from "../Context/DataStorage"
 import { useEffect } from "react"
 import { v4 as uuidv4 } from "uuid" // uuidv4();
 import { handleList } from "./CreateItem"
+import test from "../assets/images/Image_not_available.jpeg"
 
 function FetchMovie() {
     // hier werden die Daten (Sucheingabe, useReducer(lis), onEdit & onAdd geben ein dispatch weiter) aus dem Context ausgelesen.
@@ -30,6 +31,9 @@ function FetchMovie() {
                     return cV.title && cV.titleType !== "videoGame"
                 })
 
+                
+
+
                 const movieList = movieFiltered.map((cV) => {
                     return {
                         id: uuidv4(),
@@ -37,7 +41,7 @@ function FetchMovie() {
                         title: cV.title,
                         year: cV.year,
                         type: cV.titleType,
-                        poster: cV.image ? cV.image.url : "",
+                        poster: cV.image ? cV.image.url : test,
                         runningTime: cV.runningTimeInMinutes
                             ? cV.runningTimeInMinutes
                             : "not available",

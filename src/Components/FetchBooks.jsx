@@ -33,35 +33,33 @@ console.log(books)
     }
     
     return (
-            <div className="">
-                {books.items.map((book, index) => {
-                    return (
-                            <div
-                                key={index}
-                                className="flex p-4 border-2  rounded-lg bg-gray-800 h-[300px] text-white"
-                            >
-                                <img
-                                    className="h-full w-[190px] mr-10"
-                                    alt={`${book.volumeInfo.title} book`}
-                                    src={`http://books.google.com/books/content?id=${book.id}&printsec=frontcover&img=1&zoom=1&source=gbs_api`}
-                                />
-                                <div className="flex flex-col justify-between">
-                                    <h1 className="text-2xl w-40">
-                                        {book.volumeInfo.title}
-                                    </h1>
-                                        <p className="">
-                                            Author: {bookAuthors(
-                                                book.volumeInfo.authors
-                                            )}
-                                        </p>
-                                        <p className="">
-                                            Publish-date: {book.volumeInfo.publishedDate}
-                                        </p>
-                                </div>
-                            </div>
-                    )
-                })}
-            </div>
+        <div className="overflow-auto">
+            {books.items.map((book, index) => {
+                return (
+                    <div
+                        key={index}
+                        className="flex p-4 border-2  rounded-lg bg-gray-800 h-[300px] text-white "
+                    >
+                        <img
+                            className="h-full w-[190px] mr-10"
+                            alt={`${book.volumeInfo.title} book`}
+                            src={`http://books.google.com/books/content?id=${book.id}&printsec=frontcover&img=1&zoom=1&source=gbs_api`}
+                        />
+                        <div className="flex flex-col justify-between">
+                            <h1 className="text-2xl w-40">
+                                {book.volumeInfo.title}
+                            </h1>
+                            <p className="">
+                                Author: {bookAuthors(book.volumeInfo.authors)}
+                            </p>
+                            <p className="">
+                                Publish-date: {book.volumeInfo.publishedDate}
+                            </p>
+                        </div>
+                    </div>
+                )
+            })}
+        </div>
     )
 }
 
