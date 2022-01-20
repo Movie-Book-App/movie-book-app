@@ -3,15 +3,17 @@ import { useAppData } from "../Context/DataStorage"
 import { useEffect } from "react"
 import { v4 as uuidv4 } from "uuid" // uuidv4();
 import { handleList } from "./HandleList"
-
+import PlaceHolder from "../assets/images/PlaceHolder.png"
 function FetchMovie() {
     // hier werden die Daten (Sucheingabe, useReducer(lis), onEdit & onAdd geben ein dispatch weiter) aus dem Context ausgelesen.
-    const { globalSearchString, list, onAdd, onEdit } = useAppData()
+    const { globalSearchString, list, onAdd, onEdit, fav, onAddFavList } =
+        useAppData()
     // hier wird die Funktion fetchData aufgerufen, sobald die Seite geladen wird und 'globalSearchString' sich ändert.
     useEffect(() => {
         // mit der folgenden Funktion werden die Filme gefetcht; ein Array, movieList, angelegt. Dieses Array beinhaltet für jeden Film ein Objekt mit Daten.
         // Anschließend wird das Objekt mit dispatch an den reducer weitergegeben.
         async function fetchData() {
+            console.log("start")
             try {
                 const input = await fetch(
                     `https://imdb8.p.rapidapi.com/title/find?q=${globalSearchString}`,
@@ -29,15 +31,15 @@ function FetchMovie() {
                 const movieFiltered = inputToJson.results.filter((cV) => {
                     return cV.title && cV.titleType !== "videoGame"
                 })
-                console.log(movieFiltered)
-                const movieList = movieFiltered.map((cV) => {
+                console.log("movieFiltered", movieFiltered)
+                const movieList = movieFiltered?.map((cV) => {
                     return {
                         id: cV.id,
                         active: false,
                         title: cV.title,
                         year: cV.year,
                         type: cV.titleType,
-                        poster: cV.image ? cV.image.url : "",
+                        poster: cV.image ? cV.image.url : PlaceHolder,
                         runningTime: cV.runningTimeInMinutes
                             ? cV.runningTimeInMinutes
                             : "not available",
@@ -46,6 +48,15 @@ function FetchMovie() {
                             : [{ name: "Not Found" }],
                     }
                 })
+                if (fav.length > 0) {
+                    for (let i of movieList) {
+                        for (let j of fav) {
+                            if (i.id === j.id) {
+                                i.active = true
+                            }
+                        }
+                    }
+                }
                 onAdd(movieList)
             } catch (error) {
                 console.log(error)
@@ -54,6 +65,23 @@ function FetchMovie() {
         fetchData()
     }, [globalSearchString])
 
+    useEffect(() => {
+        // list filtern --> Ergebnis ist ein Array mit x-Objekten
+        const listFilter = list.filter((movie) => movie.active === true)
+        if (listFilter.length > 0 && fav.length > 0) {
+            for (let i of fav) {
+                for (let j of listFilter) {
+                    if (i.id !== j.id) {
+                        onAddFavList(j)
+                    } else {
+                        return
+                    }
+                }
+            }
+        } else {
+            onAddFavList(listFilter)
+        }
+    }, [list])
     useEffect(() => {
         const xx = localStorage.getItem("Movies-List")
         const restored = xx ? JSON.parse(xx) : []

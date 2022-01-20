@@ -13,13 +13,23 @@ function FavoriteMovies() {
         const favList = restored ? JSON.parse(restored) : []
     }, [])
 
-    useEffect(() => {
+    /*     useEffect(() => {
         // list filtern --> Ergebnis ist ein Array mit x-Objekten
         const listFilter = list.filter((movie) => movie.active === true)
-        if (listFilter.length > 0) {
-            onAddFavList(listFilter)
+        console.log("favlist", listFilter)
+        if (listFilter.length > 0 && fav.length > 0) {
+            for (let i of fav) {
+                for (let j of listFilter) {
+                    if (i.id !== j.id) {
+                        onAddFavList(j)
+                    } else {
+                        return
+                    }
+                }
+            }
         }
-    }, [list])
+        //onAddFavList(listFilter)
+    }, [list]) */
 
     return <div>{handleList(fav, onEditFavList)}</div>
 }
