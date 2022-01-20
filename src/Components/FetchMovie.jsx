@@ -1,7 +1,6 @@
 import React from "react"
 import { useAppData } from "../Context/DataStorage"
 import { useEffect } from "react"
-import { v4 as uuidv4 } from "uuid" // uuidv4();
 import { handleList } from "./HandleList"
 import PlaceHolder from "../assets/images/PlaceHolder.png"
 function FetchMovie() {
@@ -13,7 +12,6 @@ function FetchMovie() {
         // mit der folgenden Funktion werden die Filme gefetcht; ein Array, movieList, angelegt. Dieses Array beinhaltet für jeden Film ein Objekt mit Daten.
         // Anschließend wird das Objekt mit dispatch an den reducer weitergegeben.
         async function fetchData() {
-            console.log("start")
             try {
                 const input = await fetch(
                     `https://imdb8.p.rapidapi.com/title/find?q=${globalSearchString}`,
@@ -21,8 +19,7 @@ function FetchMovie() {
                         method: "GET",
                         headers: {
                             "x-rapidapi-host": "imdb8.p.rapidapi.com",
-                            "x-rapidapi-key":
-                                "e5dd24af62mshdfc9f506eec1ff3p1c0da7jsn671c8947b3ba",
+                            "x-rapidapi-key": "",
                         },
                     }
                 )
@@ -31,7 +28,6 @@ function FetchMovie() {
                 const movieFiltered = inputToJson.results.filter((cV) => {
                     return cV.title && cV.titleType !== "videoGame"
                 })
-                console.log("movieFiltered", movieFiltered)
                 const movieList = movieFiltered?.map((cV) => {
                     return {
                         id: cV.id,
@@ -64,32 +60,30 @@ function FetchMovie() {
         }
         fetchData()
     }, [globalSearchString])
-
     useEffect(() => {
         // list filtern --> Ergebnis ist ein Array mit x-Objekten
         const listFilter = list.filter((movie) => movie.active === true)
-        if (listFilter.length > 0 && fav.length > 0) {
-            for (let i of fav) {
-                for (let j of listFilter) {
-                    if (i.id !== j.id) {
-                        onAddFavList(j)
-                    } else {
-                        return
-                    }
+        if (listFilter.length > 0) {
+            if (fav.length > 0) {
+                const newItems = listFilter.filter(
+                    ({ id: id1 }) => !fav.some(({ id: id2 }) => id2 === id1)
+                )
+                if (newItems.length > 0) {
+                    onAddFavList(newItems)
                 }
+            } else {
+                onAddFavList(listFilter)
             }
-        } else {
-            onAddFavList(listFilter)
         }
     }, [list])
-    useEffect(() => {
+    /*     useEffect(() => {
         const xx = localStorage.getItem("Movies-List")
         const restored = xx ? JSON.parse(xx) : []
     }, [])
 
     useEffect(() => {
         localStorage.setItem("Movies-List", JSON.stringify(list))
-    }, [list])
+    }, [list]) */
 
     return (
         <div className="grid gap-6 mb-8 md:grid-cols-1 lg:grid-cols-1 w-full overflow-scroll h-[900px]">
