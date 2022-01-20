@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { BsSearch, BsBell } from "react-icons/bs"
 import { useAppData } from "../Context/DataStorage"
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom"
 
 function Header() {
     const [searchString, setSearchString] = useState("")
@@ -18,7 +18,8 @@ function Header() {
     function sendSearchString(event) {
         event.preventDefault()
         setGlobalSearchString(searchString)
-        history(`${medium}/Search`);
+        history(`${medium}/Search`)
+        setSearchString("")
     }
 
     return (
@@ -33,6 +34,7 @@ function Header() {
                     placeholder="Search..."
                     name="searchBar"
                     onChange={changeHandler}
+                    value={searchString}
                 />
                 <button
                     className="flex items-center justify-center px-4"
