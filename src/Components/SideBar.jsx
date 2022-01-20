@@ -52,7 +52,7 @@ function SideBar() {
         }
     }
     return (
-        <div className="w-[212px] bg-[white] flex flex-col justify-between rounded-l-[35px] border-r-2 mr-[29px] h-full">
+        <div className="w-[212px] bg-[white] flex flex-col justify-between rounded-l-[35px] border-r-2 mr-[29px] h-full overflow-auto">
             <div className="mt-[41px] ml-[37px] mb-[57px] text-[28px]">
                 LOGO
             </div>

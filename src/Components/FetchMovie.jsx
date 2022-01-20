@@ -2,6 +2,7 @@ import React from "react"
 import { useAppData } from "../Context/DataStorage"
 import { useEffect } from "react"
 import { v4 as uuidv4 } from "uuid" // uuidv4();
+import test from "../assets/images/Image_not_available.jpeg"
 import { handleList } from "./HandleList"
 
 function FetchMovie() {
@@ -20,7 +21,7 @@ function FetchMovie() {
                         headers: {
                             "x-rapidapi-host": "imdb8.p.rapidapi.com",
                             "x-rapidapi-key":
-                                "e5dd24af62mshdfc9f506eec1ff3p1c0da7jsn671c8947b3ba",
+                                "",
                         },
                     }
                 )
@@ -29,7 +30,7 @@ function FetchMovie() {
                 const movieFiltered = inputToJson.results.filter((cV) => {
                     return cV.title && cV.titleType !== "videoGame"
                 })
-                console.log(movieFiltered)
+
                 const movieList = movieFiltered.map((cV) => {
                     return {
                         id: cV.id,
@@ -37,7 +38,7 @@ function FetchMovie() {
                         title: cV.title,
                         year: cV.year,
                         type: cV.titleType,
-                        poster: cV.image ? cV.image.url : "",
+                        poster: cV.image ? cV.image.url : test,
                         runningTime: cV.runningTimeInMinutes
                             ? cV.runningTimeInMinutes
                             : "not available",
