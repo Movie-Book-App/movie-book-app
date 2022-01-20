@@ -2,12 +2,12 @@ import React from "react"
 import { useAppData } from "../Context/DataStorage"
 import { useEffect } from "react"
 import { v4 as uuidv4 } from "uuid" // uuidv4();
-import { handleList } from "./CreateItem"
 import test from "../assets/images/Image_not_available.jpeg"
+import { handleList } from "./HandleList"
 
 function FetchMovie() {
     // hier werden die Daten (Sucheingabe, useReducer(lis), onEdit & onAdd geben ein dispatch weiter) aus dem Context ausgelesen.
-    const { globalSearchString, list, onAdd } = useAppData()
+    const { globalSearchString, list, onAdd, onEdit } = useAppData()
     // hier wird die Funktion fetchData aufgerufen, sobald die Seite geladen wird und 'globalSearchString' sich ändert.
     useEffect(() => {
         // mit der folgenden Funktion werden die Filme gefetcht; ein Array, movieList, angelegt. Dieses Array beinhaltet für jeden Film ein Objekt mit Daten.
@@ -21,7 +21,7 @@ function FetchMovie() {
                         headers: {
                             "x-rapidapi-host": "imdb8.p.rapidapi.com",
                             "x-rapidapi-key":
-                                "42416b6866msh7db68447b38480fp1b1615jsn34f517b45bab",
+                                "",
                         },
                     }
                 )
@@ -31,12 +31,9 @@ function FetchMovie() {
                     return cV.title && cV.titleType !== "videoGame"
                 })
 
-                
-
-
                 const movieList = movieFiltered.map((cV) => {
                     return {
-                        id: uuidv4(),
+                        id: cV.id,
                         active: false,
                         title: cV.title,
                         year: cV.year,
@@ -70,7 +67,7 @@ function FetchMovie() {
     return (
         <div className="grid gap-6 mb-8 md:grid-cols-1 lg:grid-cols-1 w-full overflow-scroll h-[900px]">
             {/* mit der folgenden Funktion wird für jeden Film ein Card erstellt. */}
-            {handleList(list)}
+            {handleList(list, onEdit)}
         </div>
     )
 }

@@ -11,7 +11,7 @@ function Movie(props) {
     const [trailerUrl, setTrailerUrl ] = useState("")
     const { id, active, title, year, type, poster, runningTime, actors } =
         props.item
-    const { onEdit } = useAppData()
+    //const { onEdit } = useAppData()
     // hier wird das Actor-Array verkürzt (nur die Namen der Schauspieler werden angezeigt) und anschließend als String ausgegeben.
     const actorList = actors
         .map((cV) => {
@@ -89,7 +89,7 @@ function Movie(props) {
                     <AiFillHeart
                         key={uuidv4()}
                         className={!active ? "text-white" : "text-rose-600"}
-                        onClick={() => onEdit(id)}
+                        onClick={() => props.edit(id)}
                     />
                     <div className="flex text-white">
                         <MdOutlineStarBorderPurple500 />

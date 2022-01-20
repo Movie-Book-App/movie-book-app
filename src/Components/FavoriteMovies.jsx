@@ -1,10 +1,10 @@
 import React from "react"
 import { useEffect, useReducer } from "react"
 import { useAppData } from "../Context/DataStorage"
-import { handleList } from "./CreateItem"
+import { handleList } from "./HandleList"
 
 function FavoriteMovies() {
-    const { list, fav, onAdd2 } = useAppData()
+    const { list, fav, onAddFavList, onEditFavList } = useAppData()
 
     useEffect(() => {
         // lesen des localStorage - favMovie-Movies
@@ -17,11 +17,11 @@ function FavoriteMovies() {
         // list filtern --> Ergebnis ist ein Array mit x-Objekten
         const listFilter = list.filter((movie) => movie.active === true)
         if (listFilter.length > 0) {
-            onAdd2(listFilter)
+            onAddFavList(listFilter)
         }
     }, [list])
 
-    return <div>{handleList(fav)}</div>
+    return <div>{handleList(fav, onEditFavList)}</div>
 }
 
 export default FavoriteMovies

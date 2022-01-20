@@ -5,13 +5,19 @@ function UserMovieFavList() {
         const newArray = [...array]
         if (action.type === "ADD") {
             return [...newArray, ...action.payload]
+        } else if (action.type === "REMOVE") {
+            return newArray.filter((item) => item.id !== action.payload.id)
         }
+
         return newArray
     }
-    function onAdd2(param) {
+    function onAddFavList(param) {
         dispatch({ type: "ADD", payload: param })
     }
-    return [fav, onAdd2]
+    function onEditFavList(id) {
+        dispatch({ type: "REMOVE", payload: { id: id } })
+    }
+    return [fav, onAddFavList, onEditFavList]
 }
 
 export default UserMovieFavList
